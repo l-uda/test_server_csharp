@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.Text.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Tulpep.NotificationWindow;
 using Timer = System.Timers.Timer;
 
 namespace UDA_server_communication
@@ -114,6 +115,7 @@ namespace UDA_server_communication
                     {
                         main.contatore = 0;
                         putStatus_Server(char_status1);
+                        MessageBox.Show("Stato Cambiato!!", "Caption",MessageBoxButtons.OK);
                     }
                 }
             }
