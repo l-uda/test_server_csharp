@@ -153,7 +153,7 @@ namespace UDA_server_communication
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(Convert.ToString(ex));
+               // MessageBox.Show(Convert.ToString(ex));
                 throw new ApplicationException("Error", ex);
                 aTimer.Stop();
             }

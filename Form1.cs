@@ -26,8 +26,8 @@ namespace UDA_server_communication
         public string UDA_index;
         public ArrayList L1 = new ArrayList();
 
-        // Alberto: continua a riempirli fino a 7
-        // Walter: Ho allungato l'Array List fino a coprire tutti e 7 i colori
+       // Alberto: continua a riempirli fino a 7
+       // Walter: Ho allungato l'Array List fino a coprire tutti e 7 i colori
         public ArrayList txts = new ArrayList() { "IDLE"};
         public ArrayList labels = new ArrayList() { "IDLE"};
         public ArrayList colors = new ArrayList() { Color.DarkGreen };
