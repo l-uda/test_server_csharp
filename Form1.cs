@@ -35,6 +35,34 @@ namespace UDA_server_communication
 
         public Form1(string x,int j)
         {
+            txts.Add("START");
+            labels.Add("STARTED");
+            colors.Add(Color.DarkGreen);
+
+            txts.Add("ABORT");
+            labels.Add("ABORTED");
+            colors.Add(Color.DarkRed);
+
+            txts.Add("PAUSE");
+            labels.Add("PAUSED");
+            colors.Add(Color.DarkOrange);
+
+            txts.Add("RESUME");
+            labels.Add("RESUMED");
+            colors.Add(Color.Brown);
+
+            txts.Add("FINALIZED");
+            labels.Add("COMPLETED");
+            colors.Add(Color.DarkOrchid);
+
+            txts.Add("FINISHED");
+            labels.Add("FINALIZED");
+            colors.Add(Color.DarkCyan);
+
+            txts.Add("NOT IMPLEMENTED");
+            labels.Add("FINISHED");
+            colors.Add(Color.Purple);
+
             ServerRequest r = new ServerRequest(this,x);
             UDA_index = x;
             InitializeComponent();
