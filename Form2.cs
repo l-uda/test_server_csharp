@@ -37,6 +37,7 @@ namespace UDA_server_communication
         //Alberto: secondo me c'è il controllo radio-group che ti permette di avere una callback sola che dice quale dei 5 è selezionato.
         // Walter: Ho raggruppato i Radio-Buttons in un'unica groupbox invece che avere dei moduli separati
 
+
         private void Form2_Load(object sender, EventArgs e)
         {
         }
