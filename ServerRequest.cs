@@ -39,7 +39,7 @@ namespace UDA_server_communication
             aTimer.Enabled = true;
 
         }
-        // sta funzione ritorna l'url del put?? allora chiamala cosi
+        //Alberto: sta funzione ritorna l'url del put?? allora chiamala cosi
         public string getPutUrl(string k)
         {
             int ik = Int32.Parse(k);
@@ -47,51 +47,11 @@ namespace UDA_server_communication
                 return "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20200901_0900//api/uda/put/?i="+ UDA_index1 + "&k=" + ik.ToString();
             else
                 return "";
-
-
-            /*if (String.Equals(k, Convert.ToString(0)))
-            {
-                url = "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20200901_0900//api/uda/put/?i=1&k=0";
-            }
-            if (String.Equals(k, Convert.ToString(1)))
-            {
-                url = "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20200901_0900//api/uda/put/?i=1&k=1";
-
-            }
-            if (String.Equals(k, Convert.ToString(2)))
-            {
-                url = "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20200901_0900//api/uda/put/?i=1&k=2";
-            }
-            if (String.Equals(k, Convert.ToString(3)))
-            {
-                url = "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20200901_0900//api/uda/put/?i=1&k=3";
-
-            }
-            if (String.Equals(k, Convert.ToString(4)))
-            {
-                url = "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20200901_0900//api/uda/put/?i=1&k=4";
-            }
-            if (String.Equals(k, Convert.ToString(5)))
-            {
-                url = "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20200901_0900//api/uda/put/?i=1&k=5";
-            }
-            if (String.Equals(k, Convert.ToString(6)))
-            {
-                url = "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20200901_0900//api/uda/put/?i=1&k=6";
-            }
-            if (String.Equals(k, Convert.ToString(7)))
-            {
-                url = "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20200901_0900//api/uda/put/?i=1&k=7";
-            }
-
-            concatenate = string.Concat("i=", UDA_index1);
-            url = url.Replace("i=1", concatenate);
-            return url;
-            */
         }
         
-        // cosa vuol dire Rexcp1???? dai dei nomi sensati alle cose.
-        public async static Task<string> Rexcp1(string url)
+        //Alberto: cosa vuol dire Server_Request???? dai dei nomi sensati alle cose.
+        // Walter: Questo modulo serve per l'interrogazione con il server. Ho cambiato il suo nome
+        public async static Task<string> Server_Request(string url)
         {
             WebRequest server = HttpWebRequest.Create(url);
             var response = server.GetResponse();
@@ -119,7 +79,7 @@ namespace UDA_server_communication
             {
                 //concatenate_g = string.Concat("i=", UDA_index1);
                 //get_url = get_url.Replace("i=1", concatenate_g);
-                string t = await Rexcp1(get_url);
+                string t = await Server_Request(get_url);
                 main.Show_String(t, 1);              
                 char1 = Convert.ToString(t[88]);    // t[88] cos'è!?!?!?!? se t cambia lunghezza non funziona piu. 
                                                     // t è la versione string di una struttura dati di tipo JSON. 
@@ -128,7 +88,7 @@ namespace UDA_server_communication
                 {
                     main.L1.Insert(main.contatore, char1);
                     url = getPutUrl(char1);
-                    string t1 = await Rexcp1(url);
+                    string t1 = await Server_Request(url);
                     main.Show_String(t1, 2);
                     main.Status_Changed(char1, 2);
                 }
@@ -143,7 +103,7 @@ namespace UDA_server_communication
                     else
                     {
                         url = getPutUrl(char1);
-                        string t1 = await Rexcp1(url);
+                        string t1 = await Server_Request(url);
                         main.Show_String(t1, 2);
                         main.Status_Changed(char1, 2);
                         main.contatore = 1;

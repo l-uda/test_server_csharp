@@ -97,65 +97,6 @@ namespace UDA_server_communication
                     label1.Visible = true;
                 }
                 setSelection(Int32.Parse(k));
-
-                /*if (String.Equals(k, Convert.ToString(0)))
-                {
-                    st.ForeColor = Color.DarkGreen;
-                    label1.ForeColor = Color.DarkGreen;
-                    st.Text = "IDLE";
-                    label1.Text = "IDLE";
-
-                }
-                if (String.Equals(k, Convert.ToString(1)))
-                {
-                    st.ForeColor = Color.Black;
-                    label1.ForeColor = Color.Black;
-                    st.Text = "START";
-                    label1.Text = "STARTED";
-                }
-                if (String.Equals(k, Convert.ToString(2)))
-                {
-                    st.ForeColor = Color.DarkRed;
-                    label1.ForeColor = Color.DarkRed;
-                    st.Text = "ABORT";
-                    label1.Text = "ABORTED";
-
-                }
-                if (String.Equals(k, Convert.ToString(3)))
-                {
-                    label1.ForeColor = Color.DarkOrange;
-                    st.ForeColor = Color.DarkOrange;
-                    st.Text = "PAUSE";
-                    label1.Text = "PAUSED";
-                }
-                if (String.Equals(k, Convert.ToString(4)))
-                {
-                    st.ForeColor = Color.Brown;
-                    label1.ForeColor = Color.Brown;
-                    st.Text = "RESUME";
-                    label1.Text = "RESUMED";
-                }
-                if (String.Equals(k, Convert.ToString(5)))
-                {
-                    st.ForeColor = Color.DarkOrchid;
-                    label1.ForeColor = Color.DarkOrchid;
-                    st.Text = "FINALIZE";
-                    label1.Text = "COMPLETED";
-                }
-                if (String.Equals(k, Convert.ToString(6)))
-                {
-                    st.ForeColor = Color.DarkGreen;
-                    label1.ForeColor = Color.DarkGreen;
-                    st.Text = "FINISHED";
-                    label1.Text = "FINALIZED";
-                }
-                if (String.Equals(k, Convert.ToString(7)))
-                {
-                    label1.ForeColor = Color.Purple;
-                    st.ForeColor = Color.Purple;
-                    st.Text = "NOT IMPLEMENTED";
-                    label1.Text = "FINISHED";
-                }*/
             });
 
         }
