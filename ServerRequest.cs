@@ -30,7 +30,6 @@ namespace UDA_server_communication
         private Form1 main;
         public int counter;
         public string UDA_index1;
-        public string char1;
         public string save_status;
         ArrayList L = new ArrayList();
         public ServerRequest(Form1 form, string f)
@@ -74,19 +73,20 @@ namespace UDA_server_communication
 
         //Walter: La callback OneTimeEdvent (adesso Get_Status_UDA) serviva inizialmente per Get e Put. Ho cambiato adesso. 
         // Questa funzione viene invocata dal timer e serve per ottenere (get) lo stato della UDA selezionata.
-        // Dalla applicazione implementata da Sax, vado a cambiare lo stato della mia UDA tramite il comando PUT.
-        // L'UDA viene interrogata ogni secondo e solo se lo stato cambia viene mandato il messaggio di PUT al server. Esempio:
-        // L'UDA è al tempo 0 nello stato IDLE, quindi lo comunica al server (manda tramite il PUT il suo stato).
-        // Per un pò resta così finchè, dalla applicazione di Sax, mando il messaggio START (k=1). La funzione fa un match 
-        // con l'ultimo stato salvato. Quindi al tempo T(actual)-1, siccome lo stato attuale e quello salvato non corrispondono, 
-        //manda un messaggio al server con che riceverà quindi la stringa relativa a STARTED, visibile sia dall'exe che ho fatto sia dalla applicazione
-        // di Sax. Non so se mi sono spiegato bene, o se intendevi queste modifiche nel commento precedente, magari ho capito
-        // male io. Nel caso sentiamoci. 
+        // Dall' applicazione implementata da Sax, vado a cambiare lo stato della mia UDA tramite il comando PUT.
+        // L'UDA viene interrogata ogni secondo e solo se lo stato cambia viene mandato il messaggio di feedback
+        //al server tramite l'url di put. Esempio:
+        // L'UDA è al tempo 0 nello stato IDLE, quindi lo comunica al server, richiamando il modulo putstatus_Server.
+        // Per un pò resta così finchè, dalla applicazione di Sax, mando il messaggio START (k=1). Il modulo Get_Status_UDA
+        //fa un match con l'ultimo stato salvato. Quindi al tempo T(actual), siccome lo stato attuale e quello salvato non corrispondono, 
+        // Get_Status_Uda chiama la funzione putstatus_Server (riga 117) che manda un messaggio al server (STARTED, tramite un put). 
+        //Non so se mi sono spiegato bene, o se intendevi queste modifiche nel commento precedente,
+        //magari ho capito male io. Nel caso sentiamoci. Ho aggiunto una messagebox per segnalare il cambiamento di stato della UDA.
 
-        
+
         public async void Get_Status_UDA(object source, ElapsedEventArgs e)
         {
-            string url, get_url,char_status,char_status1;
+            string get_url,char_status,char_status1;
             get_url = "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20200901_0900//api/uda/get/?i="+ UDA_index1;
             try
             {
@@ -98,10 +98,10 @@ namespace UDA_server_communication
                                                                 // tu devi fare il parsing di tale json e prendere il campo giusto.
                                                                 // Walter: Ho fatto il parsing così da selezionare il campo giusto.
 
-                // La variabile main contatore server per salvare lo stato "attuale" per poi confrontarlo di volta in volta.
+                // Walter: La variabile main.contatore salva lo stato "attuale" per poi confrontarlo di volta in volta.
                 // Se il contatore è a 0, vuol dire che l'applicazione è appena partita quindi l'UDA si trova già in un suo 
                 // status, dato dalla applicazione di Sax. Il contatore diventa quindi 1, e si passa all'else, all'interno 
-                // del quale, si confronta lo stato attuale con quello precedente, ovvero quello salvato in memoria. 
+                // del quale, si confronta lo stato attuale con quello precedente. 
                 if (main.contatore == 0)
                 {
                     save_status = char_status; 
@@ -134,9 +134,9 @@ namespace UDA_server_communication
         //Walter: Il metodo putStatus_Server, serve affinchè l'UDA possa mandare al server il messaggio 
         //del suo stato, quindi il feedback. Lo status dell'UDA, puoi soltato settarlo dall'applicazione di Sax se non vuoi che l'exe
         // abbia alcun pulsante di interazione con l'utente.
-        //Quindi, se l'UDA ha per esemprio ricevuto dal server, tramite la stringa PUT il comando "START" (k=1), rimanderà al server la notifica "STARTED"
-        // tramite il put. Il cambio nello stato del server lo si può vedere sia dalla textbox in basso a destra della Form1
-        // sia dall'applicazione di Sax
+        //Quindi, se l'UDA ha per esempro ricevuto dal server, tramite la stringa PUT, il comando "START" (k=1), rimanderà al server la notifica "STARTED"
+        // tramite il suo comando di put. 
+        //Il cambio nello stato del server lo si può vedere sia dalla textbox in basso a destra della Form sia dall'applicazione di Sax
         public async void putStatus_Server(string status)
         {
             string url_put_server;
